@@ -1,1 +1,6 @@
 node_modules
+!docs/node_modules
+docs/node_modules/*
+!docs/node_modules/fabric
+docs/node_modules/fabric/*
+!docs/node_modules/fabric/dist
