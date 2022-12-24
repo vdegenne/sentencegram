@@ -12,10 +12,10 @@ export class SentenceStrip extends LitElement {
   :host {
     display: block;
     margin: 4px;
-    padding: 12px;
+    padding: 21px;
     border: 1px solid #ccc;
     color: #757575;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
   }
   `

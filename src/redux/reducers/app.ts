@@ -10,7 +10,7 @@ const slice = createSlice({
   name: 'app',
   initialState: { page: 'sentences' } as AppState,
   reducers: {
-    changePage(state, action: PayloadAction<PageValue>) {
+    setPage(state, action: PayloadAction<PageValue>) {
       state.page = action.payload
     },
     setCurrentSentenceId (state, action) {
@@ -19,5 +19,5 @@ const slice = createSlice({
   }
 })
 
-export const {changePage, setCurrentSentenceId} = slice.actions
+export const {setPage, setCurrentSentenceId} = slice.actions
 export default slice.reducer

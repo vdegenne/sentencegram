@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { collection, collectionGroup, doc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, collectionGroup, doc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore'
 import { auth, db } from '../firebase.js'
 import user, { addSentence, Canvas, loadSentences, removeSentence, resetSentences, Sentence, setUserUID, updateSentence } from './reducers/user.js'
 import { store } from './store.js'
@@ -40,11 +40,27 @@ onAuthStateChanged(auth, (user) => {
 })
 
 
-export async function updateSentenceCanvas (sentenceId: string, canvas: Canvas) {
-  if (store.getState().user.isSignedIn) {
-    const docRef = doc(db, 'users', store.getState().user.uid!, 'sentences', sentenceId)
-    await updateDoc(docRef, {
-      canvas
-    })
+export const Firestore = class {
+  static async addNewSentence (value: string) {
+    if (store.getState().user.isSignedIn) {
+      const cref = collection(db, 'users', store.getState().user.uid!, 'sentences')
+      const doc = await addDoc(cref, {
+        value,
+        canvas: ''
+      })
+      return doc.id
+    }
+    else {
+      throw new Error('User not connected')
+    }
+  }
+
+  static async updateSentenceCanvas (sentenceId: string, canvas: Canvas) {
+    if (store.getState().user.isSignedIn) {
+      const docRef = doc(db, 'users', store.getState().user.uid!, 'sentences', sentenceId)
+      await updateDoc(docRef, {
+        canvas
+      })
+    }
   }
 }

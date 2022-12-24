@@ -82,6 +82,6 @@ export class CanvasElement extends connect(store)(LitElement) {
 
   clear () {
     this.canvas.clear()
-    this.canvas.setBackgroundColor(CANVAS_BACKGROUND)
+    this.canvas.setBackgroundColor(CANVAS_BACKGROUND, () => {})
   }
 }
